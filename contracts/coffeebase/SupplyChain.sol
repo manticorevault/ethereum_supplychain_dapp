@@ -1,5 +1,7 @@
 pragma solidity ^0.4.24;
 
+
+
 // Define a Supply Chain contract
 contract SupplyChain {
     // Define "owner"

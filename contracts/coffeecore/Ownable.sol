@@ -14,13 +14,13 @@ contract Ownable {
     }
 
     // Look up the address of the owner
-    function owner() public view returns (address) {
+    function _owner() public view returns (address) {
         return origOwner;
     }
 
     // Define a function modifier "onlyOwner"
     modifier onlyOwner() {
-        require(isOwner());
+        require(isOwner(), "Only the contract owner can call this function.");
         _;
     }
 
@@ -29,20 +29,20 @@ contract Ownable {
         return msg.sender == origOwner;
     }
 
-    // Define a function to renounce ownership
+    // Define a function to renounce Ownership
     function renounceOwnership() public onlyOwner {
         emit TransferOwnership(origOwner, address(0));
-        origOwner = address(0);
+        origOwner = address(0)
     }
 
-    // Define a public function to transfer ownership
+    // Define a public function to transfer Ownership
     function transferOwnership(address newOwner) public onlyOwner {
         _transferOwnership(newOwner);
     }
 
-    // Define an internal function to transfer ownership 
+    // Define an internal function to transfer ownership
     function _transferOwnership(address newOwner) internal {
-        require(newOwner != address(0));
+        require(newOwner != address(0), "The address provided is not valid.");
         emit TransferOwnership(origOwner, newOwner);
         origOwner = newOwner;
     }
